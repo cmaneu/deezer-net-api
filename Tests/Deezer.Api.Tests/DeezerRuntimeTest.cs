@@ -10,6 +10,8 @@ namespace Deezer.Api.Tests
     {
 
         [TestMethod]
+        [TestCategory("API Call")]
+        [TestProperty("EntityType", "Country")]
         public async Task GetCurrentCountryInfos()
         {
             // Arrange
@@ -24,6 +26,8 @@ namespace Deezer.Api.Tests
         }
 
         [TestMethod]
+        [TestCategory("API Call")]
+        [TestProperty("EntityType", "Artist")]
         public async Task GetExistingArtist()
         {
             // Arrange
@@ -34,10 +38,18 @@ namespace Deezer.Api.Tests
 
             // Assert
             Assert.IsNotNull(apiCallResult);
+            Assert.AreEqual(144227, apiCallResult.Id);
             Assert.AreEqual("Katy Perry", apiCallResult.Name);
+            Assert.AreEqual("http://www.deezer.com/artist/144227", apiCallResult.WebUri);
+            Assert.AreEqual(new Uri("http://api.deezer.com/artist/144227/image"), apiCallResult.ArtistImageUri);
+            Assert.AreEqual(true, apiCallResult.HasArtistRadio);
+            Assert.IsTrue(apiCallResult.FansCount > 23000);
+            Assert.IsTrue(apiCallResult.AlbumsCount > 70);
         }
 
         [TestMethod]
+        [TestCategory("API Call")]
+        [TestProperty("EntityType", "Artist")]
         public async Task GetUnknownArtistById()
         {
             try

@@ -8,6 +8,9 @@ namespace Deezer.Api
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        [JsonProperty("link")]
+        public string WebUri { get; set; }
         
         [JsonProperty("picture")]
         public Uri ArtistImageUri { get; set; }
