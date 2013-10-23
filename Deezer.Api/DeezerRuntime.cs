@@ -49,5 +49,18 @@ namespace Deezer.Api
 
             return JsonConvert.DeserializeObject<CountryInfos>(responseContent);
         }
+
+        public async Task<Artist> GetArtist(int artistId)
+        {
+            HttpResponseMessage httpResponse = await _httpClient.GetAsync(string.Format("{0}/artist/{1}", API_ENDPOINT, artistId));
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                throw new DeezerRuntimeException(httpResponse.ReasonPhrase);
+            }
+
+            string responseContent = await httpResponse.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<Artist>(responseContent);
+        }
     }
 }
