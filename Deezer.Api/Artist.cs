@@ -24,7 +24,6 @@ namespace Deezer.Api
         [JsonProperty("nb_fan")]
         public int FansCount { get; set; }
         
-        [JsonProperty("nb_album")]
         public int AlbumsCount { get; set; }
 
         [JsonProperty("radio")]
@@ -45,6 +44,7 @@ namespace Deezer.Api
         public Artist()
         {
             Albums = new List<Album>();
+            AlbumsCount = -1;
         }
 
         public async Task<List<Album>>  LoadAlbums()
