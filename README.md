@@ -1,6 +1,6 @@
 # Deezer REST SDK for .net
 
-The Deezer REST SDK for .net allows you to build .net applications tha take advantage of 
+The Deezer REST SDK for .net allows you to build .net applications that take advantage of 
 the [Deezer REST API](http://developers.deezer.com/api).
 
 Please note that this SDK is unofficial (but the core team of that lib works at Deezer).
@@ -8,6 +8,7 @@ Please note that this SDK is unofficial (but the core team of that lib works at 
 ## Features
 
 - /infos API method - *Gets the infos about the availability of the Deezer service for the current country (geo IP-based)*
+- /artist/{id} API method - *Gets an artist based on it's ID.*
 
 ## Getting started
 
