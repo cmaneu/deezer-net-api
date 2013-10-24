@@ -52,15 +52,25 @@ namespace Deezer.Api
 
         public async Task<Artist> GetArtist(int artistId)
         {
-            HttpResponseMessage httpResponse = await _httpClient.GetAsync(string.Format("{0}/artist/{1}", API_ENDPOINT, artistId));
+            string responseContent = await this.ExecuteHttpGet(string.Format("/artist/{0}", artistId));
+
+            Artist artist = JsonConvert.DeserializeObject<Artist>(responseContent);
+
+            artist.CurrentRuntime = this;
+
+            return artist;
+        }
+
+        internal async Task<string> ExecuteHttpGet(string method)
+        {
+            HttpResponseMessage httpResponse = await this._httpClient.GetAsync(API_ENDPOINT + method);
             if (!httpResponse.IsSuccessStatusCode)
             {
                 throw new DeezerRuntimeException(httpResponse.ReasonPhrase);
             }
 
             string responseContent = await httpResponse.Content.ReadAsStringAsync();
-
-            return JsonConvert.DeserializeObject<Artist>(responseContent);
+            return responseContent;
         }
     }
 }

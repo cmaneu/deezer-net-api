@@ -66,5 +66,22 @@ namespace Deezer.Api.Tests
                 Assert.IsTrue(true);
             }
         }
+
+        [TestMethod]
+        [TestCategory("API Call")]
+        public async Task GetArtistAlbums()
+        {
+            // Arrange
+            Deezer.Api.DeezerRuntime runtime = new DeezerRuntime();
+
+            // Act
+            Artist testedArtist = await runtime.GetArtist(144227);
+            Assert.IsNotNull(testedArtist);
+
+            await testedArtist.LoadAlbums();
+
+            // Assert
+            Assert.IsTrue(testedArtist.Albums.Count > 0);
+        }
     }
 }

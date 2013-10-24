@@ -38,6 +38,8 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Album.cs" />
+    <Compile Include="MusicGenre.cs" />
     <Compile Include="Artist.cs" />
     <Compile Include="CountryInfos.cs" />
     <Compile Include="DeezerEntity.cs" />

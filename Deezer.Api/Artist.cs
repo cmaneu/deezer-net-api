@@ -1,10 +1,16 @@
 ﻿using System;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Deezer.Api
 {
+    [DebuggerDisplay("Artist({Id},{Name})")]
     public class Artist : DeezerEntity
     {
+        private List<Album> albums;
+
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -23,5 +29,40 @@ namespace Deezer.Api
 
         [JsonProperty("radio")]
         public bool HasArtistRadio { get; set; }
+
+        public List<Album> Albums
+        {
+            get
+            {
+                return this.albums;
+            }
+            set
+            {
+                SetProperty(ref albums, value);
+            }
+        }
+
+        public Artist()
+        {
+            Albums = new List<Album>();
+        }
+
+        public async Task<List<Album>>  LoadAlbums()
+        {
+            string responseContent = await CurrentRuntime.ExecuteHttpGet(string.Format("/artist/{0}/albums", Id));
+
+            var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(responseContent);
+
+            Albums = JsonConvert.DeserializeObject<List<Album>>(jsonResult["data"].ToString());
+
+            foreach (Album album in Albums)
+            {
+                album.CurrentRuntime = CurrentRuntime;    
+            }
+
+            AlbumsCount = Albums.Count;
+
+            return Albums;
+        }
     }
 }
