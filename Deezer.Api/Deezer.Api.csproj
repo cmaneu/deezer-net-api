@@ -45,7 +45,9 @@
     <Compile Include="DeezerEntity.cs" />
     <Compile Include="DeezerRuntime.cs" />
     <Compile Include="DeezerRuntimeException.cs" />
+    <Compile Include="Playlist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Track.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Threading.Tasks">

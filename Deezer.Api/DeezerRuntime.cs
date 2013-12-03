@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Deezer.Api
 {
@@ -59,6 +61,18 @@ namespace Deezer.Api
             artist.CurrentRuntime = this;
 
             return artist;
+        }
+        public async Task<Playlist> GetPlaylist(int playlistId)
+        {
+            string responseContent = await this.ExecuteHttpGet(string.Format("/playlist/{0}", playlistId));
+
+            // There an issue with the API. We only get the first 400 tracks from the playlist
+            // Working on that internally (because the /playlist/:id/tracks only has pages of 50 tracks...
+            Playlist playlist = JsonConvert.DeserializeObject<Playlist>(responseContent);
+
+            playlist.CurrentRuntime = this;
+
+            return playlist;
         }
 
         internal async Task<string> ExecuteHttpGet(string method)
