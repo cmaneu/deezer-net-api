@@ -28,5 +28,6 @@ namespace Deezer.Api
         public TimeSpan Duration { get; set; }
         public Uri Preview { get; set; }
         public Artist Artist { get; set; }
+        public Album Album { get; set; }
     }
 }
