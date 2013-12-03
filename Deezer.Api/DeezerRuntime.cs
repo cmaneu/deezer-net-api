@@ -71,6 +71,7 @@ namespace Deezer.Api
             Playlist playlist = JsonConvert.DeserializeObject<Playlist>(responseContent);
 
             playlist.CurrentRuntime = this;
+            await playlist.LoadTracksAsync();
 
             return playlist;
         }

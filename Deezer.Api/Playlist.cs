@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace Deezer.Api
@@ -49,6 +50,13 @@ namespace Deezer.Api
         internal class TracksContainer
         {
             public List<Track> Data { get; set; } 
+        }
+
+        public async Task LoadTracksAsync()
+        {
+            string responseContent = await CurrentRuntime.ExecuteHttpGet(string.Format("/playlist/{0}/tracks?limit=1000", Id));
+
+            InternalTracks = JsonConvert.DeserializeObject<TracksContainer>(responseContent);
         }
     }
 }
